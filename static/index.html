@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTPEngine Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="main-header">
+            <div class="brand">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                        <line x1="12" x2="12" y1="19" y2="22" />
+                    </svg>
+                </div>
+                <h1>RTPEngine Monitor</h1>
+            </div>
+            <nav class="header-nav">
+                <a href="#" class="nav-link active" onclick="showView('stats', this)">Statistics</a>
+                <a href="#" class="nav-link" onclick="showView('calls', this)">Calls</a>
+            </nav>
+            <div class="header-status">
+                <span id="connection-status">false</span>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <div id="monitoring-view" class="view-container hidden">
+                <!-- Active Calls Section -->
+                <section class="card" id="calls-section">
+                    <div class="card-header">
+                        <h2>ACTIVE CALLS</h2>
+                        <button class="btn-text" onclick="fetchCalls()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+                                <path d="M21 3v5h-5" />
+                            </svg>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="card-content" id="calls-list">
+                        <div class="empty-state">
+                            <p>Loading calls...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="stats-view" class="view-container">
+                <!-- Stats go here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Spy Overlay (New Modal) -->
+    <div id="spy-overlay" class="modal-overlay hidden">
+        <div class="modal-container" style="max-width: 600px;">
+            <header class="modal-header">
+                <h3>Spying on: <span id="spy-call-id" class="mono">...</span></h3>
+                <button class="btn-icon" onclick="stopSpy()">&times;</button>
+            </header>
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                <!-- Audio Stream Section -->
+                <section class="card" id="audio-section" style="border: none;">
+                    <div class="card-header" style="border: none; padding-left: 0; padding-right: 0;">
+                        <h2>AUDIO STREAM</h2>
+                    </div>
+                    <div class="card-content" style="padding: 0;">
+                        <div class="stream-status" id="stream-status-indicator">
+                            <span class="dot"></span>
+                            <span id="stream-status-text">No active stream</span>
+                        </div>
+                        <div class="audio-player-wrapper">
+                            <audio id="remoteAudio" controls autoplay></audio>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Activity Log Section -->
+                <section class="card" id="log-section" style="border: none;">
+                    <div class="card-header" style="border: none; padding-left: 0; padding-right: 0;">
+                        <h2>ACTIVITY LOG</h2>
+                    </div>
+                    <div class="card-content" style="padding: 0;">
+                        <div class="terminal-log" id="activity-log" style="height: 180px;">
+                            <div class="log-entry">
+                                <span class="log-time">--:--:--</span>
+                                <span class="log-msg">Waiting for activity...</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Overlay (Modern Modal) -->
+    <div id="details-overlay" class="modal-overlay hidden">
+        <div class="modal-container">
+            <header class="modal-header">
+                <h3>Call Details: <span id="modal-call-id">...</span></h3>
+                <button class="btn-icon" onclick="closeDetails()">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="json">JSON View</button>
+                    <button class="tab-btn" data-tab="structured">Structured</button>
+                </div>
+                <div id="modal-content" class="tab-content">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

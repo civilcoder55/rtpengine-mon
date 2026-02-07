@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # rtpengine:
+  #   image: fonoster/rtpengine:latest
+  #   container_name: rtpengine
+  #   network_mode: host
+  #   privileged: true
+  #   environment:
+  #     - PORT_MIN=10000
+  #     - PORT_MAX=20000
+  #     - LOG_LEVEL=7
+  #   restart: unless-stopped
+
+  jeager:
+    image: jaegertracing/jaeger:latest
+    container_name: jeager
+    ports:
+      - "16686:16686"
+      - "4318:4318"
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+
+    restart: unless-stopped
