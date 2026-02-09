@@ -12,13 +12,26 @@ services:
   #     - LOG_LEVEL=7
   #   restart: unless-stopped
 
-  jeager:
+  jaeger:
     image: jaegertracing/jaeger:latest
-    container_name: jeager
+    container_name: jaeger
     ports:
-      - "16686:16686"
-      - "4318:4318"
+      - "16686:16686" # UI
+      - "4318:4318" # OTLP HTTP
     environment:
-      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - METRICS_STORAGE_TYPE=prometheus
+      - PROMETHEUS_SERVER_URL=http://prometheus:9090
+    command: --config /jaeger/config.yaml
+    volumes:
+      - ./config.yml:/jaeger/config.yaml
 
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9092:9090"
     restart: unless-stopped

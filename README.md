@@ -7,6 +7,7 @@ Rtpengine-Mon is a simple tool for monitoring active calls and statistics from *
 - **Active Call Monitoring**: View all current calls handled by RTPEngine in real-time.
 - **Statistics Dashboard**: View RTPEngine statistics.
 - **Audio Spying**: High-quality audio monitoring of calls using WebRTC.
+- **Jaeger Monitoring**: Service Performance Monitoring (SPM) using OpenTelemetry for RED metrics (Request, Error, Duration).
 
 ## Screenshots
 
@@ -15,6 +16,8 @@ Rtpengine-Mon is a simple tool for monitoring active calls and statistics from *
 ![Active Calls](screenshots/2026-02-07_23-55.png)
 
 ![Call Details & Spying](screenshots/2026-02-07_23-08.png)
+
+![Jaeger Monitoring](screenshots/2026-02-09_02-32.png)
 
 
 ## Getting Started
@@ -43,4 +46,16 @@ Key configuration options:
 #### Using Go
 ```bash
 go run cmd/rtpengine-mon/main.go
+```
+
+### Observability
+
+The project includes a observability stack (Jaeger + Prometheus) to monitor performance. (experimental stuff)
+
+- **Jaeger UI**: [http://localhost:16686](http://localhost:16686) - Access the "Monitor" tab for Service Performance Monitoring (SPM).
+- **Prometheus**: Backend for metrics storage.
+
+To start the observability stack:
+```bash
+docker compose up -d
 ```
