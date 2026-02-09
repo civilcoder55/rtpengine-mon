@@ -17,8 +17,8 @@ import (
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 
-	"sdp-monitor/internal/config"
-	"sdp-monitor/internal/rtpengine"
+	"rtpengine-mon/internal/config"
+	"rtpengine-mon/internal/rtpengine"
 )
 
 // Service provides WebRTC spying capabilities on active RTPEngine calls.

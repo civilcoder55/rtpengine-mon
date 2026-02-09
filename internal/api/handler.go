@@ -9,8 +9,8 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 
-	"sdp-monitor/internal/rtpengine"
-	"sdp-monitor/internal/spy"
+	"rtpengine-mon/internal/rtpengine"
+	"rtpengine-mon/internal/spy"
 )
 
 type Handler struct {

@@ -21,7 +21,7 @@ func InitTracer(ctx context.Context, endpoint string) (*trace.TracerProvider, er
 
 	res, err := resource.New(ctx,
 		resource.WithAttributes(
-			semconv.ServiceName("sdp-monitor"),
+			semconv.ServiceName("rtpengine-mon"),
 		),
 	)
 	if err != nil {

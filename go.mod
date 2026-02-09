@@ -1,4 +1,4 @@
-module sdp-monitor
+module rtpengine-mon
 
 go 1.24.0
 

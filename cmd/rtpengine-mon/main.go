@@ -12,11 +12,11 @@ import (
 	"syscall"
 	"time"
 
-	"sdp-monitor/internal/api"
-	"sdp-monitor/internal/config"
-	"sdp-monitor/internal/rtpengine"
-	"sdp-monitor/internal/spy"
-	"sdp-monitor/pkg/telemetry"
+	"rtpengine-mon/internal/api"
+	"rtpengine-mon/internal/config"
+	"rtpengine-mon/internal/rtpengine"
+	"rtpengine-mon/internal/spy"
+	"rtpengine-mon/pkg/telemetry"
 )
 
 func main() {
