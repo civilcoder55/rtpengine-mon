@@ -19,5 +19,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         goos: linux
         goarch: amd64
-        extra_files: "static/*"
+        extra_files: "static"
         project_path: "./cmd/rtpengine-mon"
