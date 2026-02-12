@@ -149,10 +149,14 @@ func (c *client) Subscribe(ctx context.Context, callID, tag string) (map[string]
 	args := map[string]interface{}{
 		"call-id":  callID,
 		"from-tag": tag,
-		"flags":    []string{"trust-address", "replace-origin", "replace-session-connection", "generate-mid", "SDES-off", "no-rtcp-attribute", "trickle-ICE"},
+		"flags":    []string{"trust-address", "generate-mid", "SDES-off", "no-rtcp-attribute", "trickle-ICE"},
 		"rtcp-mux": []string{"offer", "require"},
 		"transport-protocol": "UDP/TLS/RTP/SAVPF",
 		"ICE": "force",
+		"codec": map[string]interface{}{
+			"strip": "all",
+			"transcode": "PCMU",
+		},
 	}
 	return c.sendCommand(ctx, "subscribe request", args)
 }
