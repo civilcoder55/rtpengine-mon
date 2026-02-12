@@ -166,6 +166,7 @@ func (c *client) SubscribeAnswer(ctx context.Context, callID, sdp, toTag string)
 		"call-id":  callID,
 		"sdp":      sdp,
 		"to-tag":   toTag,
+		"flags":    []string{"allow-transcoding"},
 	}
 	return c.sendCommand(ctx, "subscribe answer", args)
 }
